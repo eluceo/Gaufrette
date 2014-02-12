@@ -6,6 +6,7 @@ use ZipArchive;
 use Gaufrette\Adapter;
 use Gaufrette\Util;
 use Gaufrette\Exception;
+use Gaufrette\Stream;
 
 /**
  * ZIP Archive adapter
@@ -13,7 +14,8 @@ use Gaufrette\Exception;
  * @author Boris Guéry <guery.b@gmail.com>
  * @author Antoine Hérault <antoine.herault@gmail.com>
  */
-class Zip implements Adapter
+class Zip implements Adapter,
+                     StreamFactory
 {
     /**
      * @var string The zip archive full path
@@ -221,5 +223,13 @@ class Zip implements Adapter
         $this->reinitZipArchive();
 
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createStream($key)
+    {
+         return new Stream\Zip($this->zipArchive, $key);
     }
 }

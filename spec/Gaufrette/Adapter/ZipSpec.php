@@ -15,4 +15,9 @@ class ZipSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Gaufrette\Adapter');
     }
+
+    function it_is_stream_factory()
+    {
+        $this->shouldHaveType('Gaufrette\Adapter\StreamFactory');
+    }
 }
